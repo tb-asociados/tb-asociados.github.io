@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TB & Asociados – Estudio Jurídico Integral</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --color-white: #FFFFFF;
+            --color-beige: #F5F1E8;
+            --color-sand: #E8DCC5;
+            --color-light-brown: #D4C4A8;
+            --color-brown: #8B7355;
+            --color-dark-brown: #5D4C3C;
+            --color-gradient-start: #F5F1E8;
+            --color-gradient-end: #E8DCC5;
+            --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.05);
+            --shadow-medium: 0 8px 30px rgba(0, 0, 0, 0.08);
+            --transition-smooth: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--color-dark-brown);
+            background: linear-gradient(135deg, var(--color-gradient-start) 0%, var(--color-gradient-end) 100%);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            color: var(--color-dark-brown);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--color-white);
+            box-shadow: var(--shadow-soft);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 15px 0;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--color-brown) 0%, var(--color-dark-brown) 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-white);
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--color-dark-brown);
+        }
+
+        .logo-text span {
+            color: var(--color-brown);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--color-dark-brown);
+            font-weight: 500;
+            transition: var(--transition-smooth);
+            position: relative;
+        }
+
+        .nav-menu a:hover {
+            color: var(--color-brown);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--color-brown);
+            bottom: -5px;
+            left: 0;
+            transition: var(--transition-smooth);
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, var(--color-brown) 0%, var(--color-dark-brown) 100%);
+            color: var(--color-white);
+            border: none;
+            padding: 12px 28px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--color-dark-brown);
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 180px 0 100px;
+            background: linear-gradient(135deg, rgba(245, 241, 232, 0.9) 0%, rgba(232, 220, 197, 0.9) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s forwards 0.3s;
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: var(--color-brown);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s forwards 0.5s;
+        }
+
+        .hero-image {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-medium);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s forwards 0.7s;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .hero-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(139, 115, 85, 0.1) 0%, rgba(93, 76, 60, 0.1) 100%);
+            z-index: 1;
+        }
+
+        .whatsapp-button {
+            background-color: #25D366;
+            color: white;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition-smooth);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s forwards 0.9s;
+        }
+
+        .whatsapp-button:hover {
+            background-color: #128C7E;
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        /* Sections */
+        section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(135deg, var(--color-brown) 0%, var(--color-dark-brown) 100%);
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .about-features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .feature-item {
+            background-color: var(--color-white);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-soft);
+            transition: var(--transition-smooth);
+        }
+
+        .feature-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .feature-item i {
+            font-size: 2rem;
+            color: var(--color-brown);
+            margin-bottom: 15px;
+        }
+
+        /* Practice Areas */
+        .practice-areas {
+            background-color: var(--color-beige);
+        }
+
+        .areas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .area-card {
+            background-color: var(--color-white);
+            border-radius: 12px;
+            padding: 35px 25px;
+            text-align: center;
+            box-shadow: var(--shadow-soft);
+            transition: var(--transition-smooth);
+            border: 1px solid transparent;
+        }
+
+        .area-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-medium);
+            border-color: var(--color-light-brown);
+        }
+
+        .area-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--color-sand) 0%, var(--color-light-brown) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 28px;
+            color: var(--color-dark-brown);
+        }
+
+        .area-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        /* Contact Section */
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+
+        .contact-form {
+            background-color: var(--color-white);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: var(--shadow-medium);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid var(--color-light-brown);
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            transition: var(--transition-smooth);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--color-brown);
+            box-shadow: 0 0 0 3px rgba(139, 115, 85, 0.1);
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .info-item i {
+            font-size: 1.5rem;
+            color: var(--color-brown);
+            margin-top: 5px;
+        }
+
+        .map-container {
+            height: 300px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--color-dark-brown);
+            color: var(--color-beige);
+            padding: 70px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--color-white);
+            margin-bottom: 20px;
+        }
+
+        .footer-logo span {
+            color: var(--color-sand);
+        }
+
+        .footer-column h3 {
+            color: var(--color-white);
+            margin-bottom: 25px;
+            font-size: 1.3rem;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-column ul li a {
+            color: var(--color-beige);
+            text-decoration: none;
+            transition: var(--transition-smooth);
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--color-sand);
+            padding-left: 5px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--color-white);
+            text-decoration: none;
+            transition: var(--transition-smooth);
+        }
+
+        .social-icons a:hover {
+            background-color: var(--color-brown);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: var(--color-sand);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero-content, .about-content, .contact-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .hero-text h1 {
+                font-size: 2.8rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--color-white);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: var(--shadow-medium);
+            }
+            
+            .nav-menu.active {
+                display: flex;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero {
+                padding: 150px 0 80px;
+            }
+            
+            .hero-text h1 {
+                font-size: 2.3rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .about-features {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+            
+            .contact-form {
+                padding: 25px;
+            }
+            
+            .cta-button {
+                padding: 10px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">TB</div>
+                    <div class="logo-text">TB & <span>Asociados</span></div>
+                </div>
+                
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <nav class="nav-menu" id="navMenu">
+                    <a href="#inicio">Inicio</a>
+                    <a href="#nosotros">Nosotros</a>
+                    <a href="#areas">Áreas de Práctica</a>
+                    <a href="#contacto">Contacto</a>
+                </nav>
+                
+                <a href="#contacto" class="cta-button">Agendar Consulta</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Expertos en todas las materias del derecho</h1>
+                    <p>Con los Doctores Trejos | Bravo & Asociados brindamos soluciones jurídicas integrales con profesionalismo, ética y compromiso. Su confianza es nuestro principal valor.</p>
+                    <a href="https://wa.me/5493624900444?text=Hola,+quiero+solicitar+una+entrevista." class="whatsapp-button" target="_blank">
+                        <i class="fab fa-whatsapp"></i> Consultar por WhatsApp
+                    </a>
+                </div>
+                <div class="hero-image">
+                    <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Estudio Jurídico TB & Asociados">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="nosotros">
+        <div class="container">
+            <h2 class="section-title">TB & Asociados</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Somos un estudio jurídico integral con sede en Resistencia, Chaco, comprometido con brindar asesoramiento legal de excelencia en todas las áreas del derecho.</p>
+                    <p>Nuestro equipo de profesionales combina experiencia, actualización constante y un enfoque personalizado para cada cliente, garantizando soluciones efectivas y estrategias adaptadas a sus necesidades específicas.</p>
+                    <p>En TB & Asociados entendemos que cada caso es único, por lo que dedicamos tiempo a comprender en profundidad la situación de nuestros clientes para ofrecer el mejor camino legal posible.</p>
+                </div>
+                <div class="about-features">
+                    <div class="feature-item">
+                        <i class="fas fa-balance-scale"></i>
+                        <h3>Ética Profesional</h3>
+                        <p>Actuamos con integridad y transparencia en todas nuestras intervenciones.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-users"></i>
+                        <h3>Enfoque Personalizado</h3>
+                        <p>Cada cliente recibe atención individualizada y estrategias a medida.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-graduation-cap"></i>
+                        <h3>Actualización Constante</h3>
+                        <p>Nuestros profesionales se mantienen al día con los cambios normativos.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-handshake"></i>
+                        <h3>Compromiso Total</h3>
+                        <p>Nos involucramos profundamente en cada caso para lograr los mejores resultados.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Practice Areas Section -->
+    <section class="practice-areas" id="areas">
+        <div class="container">
+            <h2 class="section-title">Áreas de Práctica</h2>
+            <div class="areas-grid">
+                <div class="area-card">
+                    <div class="area-icon">
+                        <i class="fas fa-gavel"></i>
+                    </div>
+                    <h3>Derecho Penal</h3>
+                    <p>Defensa y asesoramiento en procesos penales, delitos económicos, violencia familiar.</p>
+                </div>
+                <div class="area-card">
+                    <div class="area-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3>Derecho Civil</h3>
+                    <p>Contratos, sucesiones, responsabilidad civil, daños y perjuicios, propiedad.</p>
+                </div>
+                <div class="area-card">
+                    <div class="area-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <h3>Derecho Laboral</h3>
+                    <p>Despidos, accidentes de trabajo, negociaciones colectivas, asesoramiento a empresas.</p>
+                </div>
+                <div class="area-card">
+                    <div class="area-icon">
+                        <i class="fas fa-landmark"></i>
+                    </div>
+                    <h3>Derecho Administrativo</h3>
+                    <p>Procedimientos ante organismos públicos, licitaciones, contencioso administrativo.</p>
+                </div>
+                <div class="area-card">
+                    <div class="area-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Derecho de Familia</h3>
+                    <p>Divorcios, alimentos, tenencia, adopciones, violencia familiar, uniones convivenciales.</p>
+                </div>
+                <div class="area-card">
+                    <div class="area-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Derecho Comercial</h3>
+                    <p>Constitución de empresas, concursos y quiebras, contratos comerciales, sociedades.</p>
+                </div>
+                <div class="area-card">
+                    <div class="area-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3>Derecho Ambiental</h3>
+                    <p>Asesoramiento en normativa ambiental, impactos ambientales, recursos naturales.</p>
+                </div>
+                <div class="area-card">
+                    <div class="area-icon">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h3>Derecho Tributario</h3>
+                    <p>Planificación fiscal, defensa en inspecciones, recursos ante organismos recaudadores.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contacto">
+        <div class="container">
+            <h2 class="section-title">Contacto</h2>
+            <div class="contact-content">
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Nombre completo</label>
+                            <input type="text" id="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Teléfono</label>
+                            <input type="tel" id="phone" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Motivo de consulta</label>
+                            <select id="subject" class="form-control" required>
+                                <option value="">Seleccione un área</option>
+                                <option value="Penal">Derecho Penal</option>
+                                <option value="Civil">Derecho Civil</option>
+                                <option value="Laboral">Derecho Laboral</option>
+                                <option value="Familia">Derecho de Familia</option>
+                                <option value="Comercial">Derecho Comercial</option>
+                                <option value="Otro">Otro</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Mensaje</label>
+                            <textarea id="message" class="form-control" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="cta-button" style="width: 100%;">Enviar Consulta</button>
+                    </form>
+                </div>
+                <div class="contact-info">
+                    <div class="info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h3>Ubicación</h3>
+                            <p>Juan Domingo Perón 475, Galería – Oficina 2<br>Resistencia, Chaco, Argentina</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fab fa-whatsapp"></i>
+                        <div>
+                            <h3>WhatsApp</h3>
+                            <p>+54 9 3624 900444</p>
+                            <a href="https://wa.me/5493624900444?text=Hola,+quiero+solicitar+una+entrevista." class="whatsapp-button" style="margin-top: 10px; padding: 10px 20px; font-size: 0.9rem;" target="_blank">
+                                <i class="fab fa-whatsapp"></i> Enviar mensaje
+                            </a>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="far fa-clock"></i>
+                        <div>
+                            <h3>Horario de atención</h3>
+                            <p>Lunes a Viernes: 9:00 - 18:00 hs<br>Sábados: 9:00 - 13:00 hs</p>
+                        </div>
+                    </div>
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3540.347668447091!2d-58.98346712369028!3d-27.45155011617207!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94450cf0b23d5a0f%3A0x5e5b5e5b5e5b5e5b!2sJuan%20Domingo%20Per%C3%B3n%20475%2C%20Resistencia%2C%20Chaco%2C%20Argentina!5e0!3m2!1ses!2sus!4v1681234567890!5m2!1ses!2sus" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <div class="footer-logo">TB & <span>Asociados</span></div>
+                    <p>Estudio Jurídico Integral comprometido con la excelencia profesional y la defensa de los derechos de nuestros clientes.</p>
+                    <div class="social-icons">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul>
+                        <li><a href="#inicio">Inicio</a></li>
+                        <li><a href="#nosotros">Nosotros</a></li>
+                        <li><a href="#areas">Áreas de Práctica</a></li>
+                        <li><a href="#contacto">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Áreas de Práctica</h3>
+                    <ul>
+                        <li><a href="#areas">Derecho Penal</a></li>
+                        <li><a href="#areas">Derecho Civil</a></li>
+                        <li><a href="#areas">Derecho Laboral</a></li>
+                        <li><a href="#areas">Derecho de Familia</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contacto</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Juan Domingo Perón 475, Oficina 2</li>
+                        <li><i class="fab fa-whatsapp"></i> +54 9 3624 900444</li>
+                        <li><i class="far fa-clock"></i> Lun-Vie: 9:00-18:00</li>
+                        <li><i class="far fa-envelope"></i> info@tbasociados.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 TB & Asociados – Estudio Jurídico Integral. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navMenu = document.getElementById('navMenu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navMenu.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+        
+        // Form submission
+        const contactForm = document.getElementById('contactForm');
+        
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            
+            // Create WhatsApp message
+            const whatsappMessage = `Hola, mi nombre es ${name}. Quiero solicitar una entrevista sobre: ${subject}. Mi teléfono es ${phone} y mi email ${email}. Mensaje: ${message}`;
+            
+            // Encode message for URL
+            const encodedMessage = encodeURIComponent(whatsappMessage);
+            
+            // Open WhatsApp with pre-filled message
+            window.open(`https://wa.me/5493624900444?text=${encodedMessage}`, '_blank');
+            
+            // Reset form
+            contactForm.reset();
+            
+            // Show success message
+            alert('¡Gracias por su consulta! Se abrirá WhatsApp para que pueda enviarnos su mensaje.');
+        });
+        
+        // Scroll animations
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+        
+        fadeElements.forEach(element => {
+            observer.observe(element);
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
