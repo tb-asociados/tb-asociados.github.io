@@ -856,7 +856,7 @@
                 </div>
             </div>
             <div class="copyright">
-                <p>&copy; 2023 TB & Asociados – Estudio Jurídico Integral. Todos los derechos reservados.</p>
+               <p>&copy; <span id="year"></span> TB & Asociados – Estudio Jurídico Integral. Todos los derechos reservados.</p>
             </div>
         </div>
     </footer>
@@ -945,5 +945,9 @@
             });
         });
     </script>
+    <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
 </body>
 </html>
